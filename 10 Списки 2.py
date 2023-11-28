@@ -341,3 +341,36 @@ result = swap_elements(data)
 # print(result)
 
 
+# Task 12
+"""
+https://stepik.org/lesson/957414/step/12?unit=963847
+data - строка
+d - список (словарь)
+Напишите код, который анализирует строку data и
+возвращает массив всех возможных комбинаций слов, которые образуют исходную строку.
+
+Input:  Wordbreakproblem
+        ["this","th","is","famous","Word","break","b","r","e","a","k","br","bre","brea","ak","problem"]
+
+Output: ["Word b r e a k problem",
+        "Word b r e ak problem",
+        "Word br e a k problem",
+        "Word br e ak problem",
+        "Word bre a k problem",
+        "Word bre ak problem",
+        "Word brea k problem",
+        "Word break problem"]
+"""
+import json
+data, d = map(str.strip, input().split(" | "))
+d = json.loads(d)
+
+from itertools import permutations, chain
+def parse(data, d):
+    ls = chain(*map(lambda x: permutations(d, x), range(len(d) + 1)))
+    result = [' '.join(el) for el in ls if ''.join(el) == data]
+    result.sort()
+    return sorted(result)
+
+# print(json.dumps(result := parse(data, d), separators=(',', ':')))
+
